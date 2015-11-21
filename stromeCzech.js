@@ -115,6 +115,18 @@ d.deleteNode=function(node)
 	par.children.splice(ppp,1);
 	return true;
 };
+d.getDepth=function(node)
+{
+	var depth=0;
+	for(;;){
+		node=d.getParent(node);
+		if(!node){
+			break;
+		}
+		++depth;
+	}
+	return depth;
+};
 d.walk=function(node,pre,post)
 {
 	pre(node);
