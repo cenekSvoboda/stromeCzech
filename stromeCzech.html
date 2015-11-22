@@ -9,16 +9,21 @@
 </div>
 <script type="text/javascript" src="./stromeCzech.js"></script>
 <script type="text/javascript">
-
+d.showAll=function()
+{
+	d.find("content").innerHTML+="<br/>showAll:";
+	d.walk(d.strom,
+		function(hoo){
+			d.find("content").innerHTML+="<div>pre:"+hoo.data.text+" id:"+hoo.id;
+		},
+		function(haa){
+			d.find("content").innerHTML+="<br/>post:"+haa.data.text+"</div>";
+		}
+	);
+};
 d.strom={id:0,data:{text:"bar0"},children:[{id:1,data:{text:"boo1"}},{id:2,data:{text:"moo2"},children:[{id:3,data:{text:"bba3"}},{id:4,data:{text:"hha4"}}]}]};
-d.walk(d.strom,
-	function(hoo){
-		d.find("content").innerHTML+="<div>pre:"+hoo.data.text;
-	},
-	function(haa){
-		d.find("content").innerHTML+="<br/>post:"+haa.data.text+"</div>";
-	}
-);
+
+d.showAll();
 
 var lastId=d.getLastId();
 d.find("content").innerHTML+="<br/><br/>lastID:"+lastId+"";
@@ -28,7 +33,7 @@ var nod=d.getNodeById(2);
 d.find("content").innerHTML+="<br/><br/>id:"+nod.id+"";
 
 
-d.addNodeInto(nod,{text:"huu5"});
+var ddd=d.addNodeInto(nod,{text:"huu5"});
 
 var chino=d.getParent(nod);
 d.addNodeInto(chino,{text:"buu6"});
@@ -36,32 +41,29 @@ d.addNodeInto(chino,{text:"buu6"});
 var eee=d.addNodeBefore(nod,{text:"baa7"});
 var fff=d.addNodeAfter(nod,{text:"baa8"});
 
-d.walk(d.strom,
-	function(hoo){
-		d.find("content").innerHTML+="<div>pre:"+hoo.data.text;
-	},
-	function(haa){
-		d.find("content").innerHTML+="<br/>post:"+haa.data.text+"</div>";
-	}
-);
+d.showAll();
 
 d.find("content").innerHTML+="<br/><br/>delete:";
 d.deleteNode(d.getNodeById(eee));
 d.deleteNode(d.getNodeById(fff));
 
-d.walk(d.strom,
-	function(hoo){
-		d.find("content").innerHTML+="<div>pre:"+hoo.data.text;
-	},
-	function(haa){
-		d.find("content").innerHTML+="<br/>post:"+haa.data.text+"</div>";
-	}
-);
+d.showAll();
 
 var nod=d.getNodeById(3);
 var dep=d.getDepth(nod);
 d.find("content").innerHTML+="<br/><br/>depth:"+dep;
 
+d.deleteNode(d.getNodeById(ddd));
+
+d.showAll();
+
+d.deleteNode(d.getNodeById(6));
+
+d.showAll();
+
+d.deleteNode(d.getNodeById(2));
+
+d.showAll();
 </script>
 </body>
 </html>
